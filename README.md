@@ -1,293 +1,557 @@
-MySQL Shell 8.0.46
+# MediTrack 🏥
 
-Copyright © 2016, 2026, Oracle and/or its affiliates.
-Oracle is a registered trademark of Oracle Corporation and/or its affiliates.
-Other names may be trademarks of their respective owners.
+> A relational healthcare management database built with **MySQL** for managing patients, doctors, appointments, prescriptions, and billing.
 
-Type ‘\help’ or ‘\?’ for help; ‘\quit’ to exit.
- MySQL  JS > \sql
-Switching to SQL mode… Commands end with ;
- MySQL  SQL > \connect root@localhost:3306
-Creating a session to ‘root@localhost:3306’
-Fetching global names for auto-completion… Press ^C to stop.
-Your MySQL connection id is 15
-Server version: 8.0.46 MySQL Community Server – GPL
-No default schema selected; type \use <schema> to set one.
- MySQL  localhost:3306 ssl  SQL > CREATE DATABASE MediTrack;
-Query OK, 1 row affected (0.1010 sec)
- MySQL  localhost:3306 ssl  SQL > use MediTrack;
-Default schema set to `MediTrack`.
-Fetching global names, object names from `meditrack` for auto-completion… Press ^C to stop.
- MySQL  localhost:3306 ssl  meditrack  SQL > CREATE TABLE Patients (
-                                          ->                                           ->     Patient_ID INT PRIMARY KEY,
-                                          ->                                           ->     Name VARCHAR(100),
-                                          ->                                           ->     Age INT,
-                                          ->                                           ->     Gender VARCHAR(10),
-                                          ->                                           ->     Contact VARCHAR(15),
-                                          ->                                           ->     Email VARCHAR(100),
-                                          ->                                           ->     Address VARCHAR(100)
-                                          ->                                           ->   );
-ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘->     Patient_ID INT PRIMARY KEY,
-	‘ at line 2
- MySQL  localhost:3306 ssl  meditrack  SQL > Query OK, 0 rows affected (0.0261 sec)
-                                          -> CREATE TABLE Patients (
-                                          ->                                           ->     Patient_ID INT PRIMARY KEY,
-                                          ->                                           ->     Name VARCHAR(100),
-                                          ->                                           ->     Age INT,
-                                          ->                                           ->     Gender VARCHAR(10),
-                                          ->                                           ->     Contact VARCHAR(15),
-                                          ->                                           ->     Email VARCHAR(100),
-                                          ->                                           ->     Address VARCHAR(100)
-                                          ->                                           ->   );
-ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘Query OK, 0 rows affected (0.0261 sec)
-CREATE TABLE Patients (
-                 ‘ at line 1
- MySQL  localhost:3306 ssl  meditrack  SQL > Query OK, 0 rows affected (0.0261 sec)
-                                          -> CREATE TABLE Patients (
-                                          ->     Patient_ID INT PRIMARY KEY,
+---
 
-                                          ->     Name VARCHAR(100),
-                                          ->     Age INT,
-                                          ->     Gender VARCHAR(10),
-                                          ->     Contact VARCHAR(15),
-                                          ->     Email VARCHAR(100),
-                                          ->     Address VARCHAR(100)
-                                          -> );
-ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ‘Query OK, 0 rows affected (0.0261 sec)
-CREATE TABLE Patients (
-    Patient_ID IN’ at line 1
- MySQL  localhost:3306 ssl  meditrack  SQL > ^C
- MySQL  localhost:3306 ssl  meditrack  SQL > CREATE TABLE Patients (
-	    Patient_ID INT PRIMARY KEY,
+## 📌 Overview
 
-                                          ->     Name VARCHAR(100),
-                                          ->     Age INT,
-                                          ->     Gender VARCHAR(10),
-                                          ->     Contact VARCHAR(15),
-                                          ->     Email VARCHAR(100),
-                                          ->     Address VARCHAR(100)
-                                          -> );
-Query OK, 0 rows affected (0.0975 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > INSERT INTO Patients VALUES
-                                          -> (1, “Rohit Sharma”, 34, “M”, “9831000001”, rohit.sharma@gmail.com, “Kolkata”),
-                                          -> (2, “Simran Kaur”, 29, “F”, “9831000002”, simran.kaur@yahoo.com, “Delhi”),
-                                          -> (3, “Amit Ghosh”, 45, “M”, “9831000003”, amit.ghosh@gmail.com, “Mumbai”),
-                                          -> (4, “Nisha Patel”, 51, “F”, “9831000004”, nisha.patel@hotmail.com, “Ahmedabad”),
-                                          -> (5, “Suresh Reddy”, 60, “M”, “9831000005”, suresh.reddy@gmail.com, “Hyderabad”),
-                                          -> (6, “Meera Nair”, 38, “F”, “9831000006”, meera.nair@yahoo.com, “Chennai”),
-                                          -> (7, “Vikas Yadav”, 27, “M”, “9831000007”, vikas.yadav@outlook.com, “Lucknow”),
-                                          -> (8, “Anjali Gupta”, 33, “F”, “9831000008”, anjali.gupta@gmail.com, “Jaipur”),
-                                          -> (9, “Rajesh Kumar”, 55, “M”, “9831000009”, rajesh.kumar@yahoo.com, “Pune”),
-                                          -> (10, “Pooja Singh”, 41, “F”, “9831000010”, pooja.singh@gmail.com, “Bhopal”),
-                                          -> (11, “Sanjay Verma”, 48, “M”, “9831000011”, sanjay.verma@outlook.com, “Kolkata”),
-                                          -> (12, “Kiran Das”, 36, “F”, “9831000012”, kiran.das@gmail.com, “Delhi”),
-                                          -> (13, “Manoj Tiwari”, 29, “M”, “9831000013”, manoj.tiwari@yahoo.com, “Mumbai”),
-                                          -> (14, “Ritu Chatterjee”, 44, “F”, “9831000014”, ritu.chatterjee@gmail.com, “Kolkata”),
-                                          -> (15, “Deepak Joshi”, 52, “M”, “9831000015”, deepak.joshi@outlook.com, “Ahmedabad”),
-                                          -> (16, “Swati Bose”, 31, “F”, “9831000016”, swati.bose@gmail.com, “Hyderabad”),
-                                          -> (17, “Arvind Rao”, 39, “M”, “9831000017”, arvind.rao@yahoo.com, “Chennai”),
-                                          -> (18, “Nandini Sen”, 26, “F”, “9831000018”, nandini.sen@gmail.com, “Lucknow”),
-                                          -> (19, “Harish Chandra”, 58, “M”, “9831000019”, harish.chandra@outlook.com, “Jaipur”),
-                                          -> (20, “Lata Mishra”, 47, “F”, “9831000020”, lata.mishra@gmail.com, “Pune”);
-Query OK, 20 rows affected (0.0132 sec)
+**MediTrack** is a MySQL-based healthcare management system designed to demonstrate relational database concepts and SQL operations.
 
-Records: 20  Duplicates: 0  Warnings: 0
- MySQL  localhost:3306 ssl  meditrack  SQL > SELECT * FROM Patients;
-+------------+-----------------+-----+--------+------------+----------------------------+-----------+
-| Patient_ID | Name            | Age | Gender | Contact    | Email                      | Address   |
-+------------+-----------------+-----+--------+------------+----------------------------+-----------+
-|          1 | Rohit Sharma    |  34 | M      | 9831000001 | rohit.sharma@gmail.com     | Kolkata   |
-|          2 | Simran Kaur     |  29 | F      | 9831000002 | simran.kaur@yahoo.com      | Delhi     |
-|          3 | Amit Ghosh      |  45 | M      | 9831000003 | amit.ghosh@gmail.com       | Mumbai    |
-|          4 | Nisha Patel     |  51 | F      | 9831000004 | nisha.patel@hotmail.com    | Ahmedabad |
-|          5 | Suresh Reddy    |  60 | M      | 9831000005 | suresh.reddy@gmail.com     | Hyderabad |
-|          6 | Meera Nair      |  38 | F      | 9831000006 | meera.nair@yahoo.com       | Chennai   |
-|          7 | Vikas Yadav     |  27 | M      | 9831000007 | vikas.yadav@outlook.com    | Lucknow   |
-|          8 | Anjali Gupta    |  33 | F      | 9831000008 | anjali.gupta@gmail.com     | Jaipur    |
-|          9 | Rajesh Kumar    |  55 | M      | 9831000009 | rajesh.kumar@yahoo.com     | Pune      |
-|         10 | Pooja Singh     |  41 | F      | 9831000010 | pooja.singh@gmail.com      | Bhopal    |
-|         11 | Sanjay Verma    |  48 | M      | 9831000011 | sanjay.verma@outlook.com   | Kolkata   |
-|         12 | Kiran Das       |  36 | F      | 9831000012 | kiran.das@gmail.com        | Delhi     |
-|         13 | Manoj Tiwari    |  29 | M      | 9831000013 | manoj.tiwari@yahoo.com     | Mumbai    |
-|         14 | Ritu Chatterjee |  44 | F      | 9831000014 | ritu.chatterjee@gmail.com  | Kolkata   |
-|         15 | Deepak Joshi    |  52 | M      | 9831000015 | deepak.joshi@outlook.com   | Ahmedabad |
-|         16 | Swati Bose      |  31 | F      | 9831000016 | swati.bose@gmail.com       | Hyderabad |
-|         17 | Arvind Rao      |  39 | M      | 9831000017 | arvind.rao@yahoo.com       | Chennai   |
-|         18 | Nandini Sen     |  26 | F      | 9831000018 | nandini.sen@gmail.com      | Lucknow   |
-|         19 | Harish Chandra  |  58 | M      | 9831000019 | harish.chandra@outlook.com | Jaipur    |
-|         20 | Lata Mishra     |  47 | F      | 9831000020 | lata.mishra@gmail.com      | Pune      |
-+------------+-----------------+-----+--------+------------+----------------------------+-----------+
-20 rows in set (0.0056 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > CREATE TABLE Doctors (
-                                          ->     Doctor_ID INT PRIMARY KEY,
-                                          ->     Name VARCHAR(100),
-                                          ->     Specialization VARCHAR(50),
+The database contains five core entities:
 
-                                          ->     Fee DECIMAL(10,2),
-                                          ->     Experience_Years INT
-                                          -> );
-Query OK, 0 rows affected (0.0494 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > INSERT INTO Doctors VALUES
-                                          -> (201, “Dr. Rohan Mehta”, “Cardiology”, 800.00, 12),
-                                          -> (202, “Dr. Ananya Roy”, “Dermatology”, 500.00, 8),
-                                          -> (203, “Dr. Vikram Singh”, “Orthopedics”, 700.00, 15),
-                                          -> (204, “Dr. Priya Nair”, “Pediatrics”, 450.00, 10),
-                                          -> (205, “Dr. Arjun Kapoor”, “Neurology”, 900.00, 18),
-                                          -> (206, “Dr. Sneha Iyer”, “Gynecology”, 600.00, 9),
-                                          -> (207, “Dr. Karan Malhotra”, “ENT”, 400.00, 7),
-                                          -> (208, “Dr. Divya Menon”, “Ophthalmology”, 550.00, 11),
-                                          -> (209, “Dr. Rahul Verma”, “General Medicine”, 300.00, 6),
-                                          -> (210, “Dr. Neha Joshi”, “Psychiatry”, 650.00, 13),
-                                          -> (211, “Dr. Sameer Khan”, “Urology”, 750.00, 14),
-                                          -> (212, “Dr. Pooja Desai”, “Endocrinology”, 700.00, 10),
-                                          -> (213, “Dr. Aditya Rao”, “Gastroenterology”, 800.00, 16),
-                                          -> (214, “Dr. Kavita Pillai”, “Oncology”, 1000.00, 20),
-                                          -> (215, “Dr. Manish Agarwal”, “Nephrology”, 850.00, 17);
-Query OK, 15 rows affected (0.0068 sec)
+- **Patients** — stores patient information
+- **Doctors** — stores doctor and specialization details
+- **Appointments** — connects patients with doctors
+- **Prescriptions** — stores medicines prescribed during appointments
+- **Billing** — manages appointment payment information
 
-Records: 15  Duplicates: 0  Warnings: 0
- MySQL  localhost:3306 ssl  meditrack  SQL > SELECT * FROM Doctors;
-+-----------+--------------------+------------------+---------+------------------+
-| Doctor_ID | Name               | Specialization   | Fee     | Experience_Years |
-+-----------+--------------------+------------------+---------+------------------+
-|       201 | Dr. Rohan Mehta    | Cardiology       |  800.00 |               12 |
-|       202 | Dr. Ananya Roy     | Dermatology      |  500.00 |                8 |
-|       203 | Dr. Vikram Singh   | Orthopedics      |  700.00 |               15 |
-|       204 | Dr. Priya Nair     | Pediatrics       |  450.00 |               10 |
-|       205 | Dr. Arjun Kapoor   | Neurology        |  900.00 |               18 |
-|       206 | Dr. Sneha Iyer     | Gynecology       |  600.00 |                9 |
-|       207 | Dr. Karan Malhotra | ENT              |  400.00 |                7 |
-|       208 | Dr. Divya Menon    | Ophthalmology    |  550.00 |               11 |
-|       209 | Dr. Rahul Verma    | General Medicine |  300.00 |                6 |
-|       210 | Dr. Neha Joshi     | Psychiatry       |  650.00 |               13 |
-|       211 | Dr. Sameer Khan    | Urology          |  750.00 |               14 |
-|       212 | Dr. Pooja Desai    | Endocrinology    |  700.00 |               10 |
-|       213 | Dr. Aditya Rao     | Gastroenterology |  800.00 |               16 |
-|       214 | Dr. Kavita Pillai  | Oncology         | 1000.00 |               20 |
-|       215 | Dr. Manish Agarwal | Nephrology       |  850.00 |               17 |
-+-----------+--------------------+------------------+---------+------------------+
-15 rows in set (0.0009 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > CREATE TABLE Appointments (
-                                          ->     Appointment_ID INT PRIMARY KEY,
-                                          ->     Patient_ID INT,
-                                          ->     Doctor_ID INT,
-                                          ->     Appointment_Date DATE,
-                                          ->     Status VARCHAR(20),
-                                          ->     FOREIGN KEY (Patient_ID) REFERENCES Patients(Patient_ID),
-                                          ->     FOREIGN KEY (Doctor_ID) REFERENCES Doctors(Doctor_ID)
-                                          -> );
-Query OK, 0 rows affected (0.0653 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > INSERT INTO Appointments VALUES
+---
 
-                                          -> (3001, 1, 201, “2024-01-05”, “Completed”),
-                                          -> (3002, 3, 205, “2024-01-06”, “Completed”),
-                                          -> (3003, 5, 203, “2024-01-07”, “Completed”),
-                                          -> (3004, 7, 209, “2024-01-08”, “Completed”),
-                                          -> (3005, 10, 214, “2024-01-09”, “Completed”),
-                                          -> (3006, 2, 206, “2024-01-10”, “Completed”),
-                                          -> (3007, 4, 202, “2024-01-11”, “Completed”),
-                                          -> (3008, 6, 208, “2024-01-12”, “Completed”),
-                                          -> (3009, 8, 213, “2024-01-13”, “Completed”),
-                                          -> (3010, 9, 210, “2024-01-14”, “Completed”);
-Query OK, 10 rows affected (0.0271 sec)
+## 🛠️ Tech Stack
 
-Records: 10  Duplicates: 0  Warnings: 0
- MySQL  localhost:3306 ssl  meditrack  SQL > SELECT * FROM Appointments;
-+----------------+------------+-----------+------------------+-----------+
-| Appointment_ID | Patient_ID | Doctor_ID | Appointment_Date | Status    |
-+----------------+------------+-----------+------------------+-----------+
-|           3001 |          1 |       201 | 2024-01-05       | Completed |
-|           3002 |          3 |       205 | 2024-01-06       | Completed |
-|           3003 |          5 |       203 | 2024-01-07       | Completed |
-|           3004 |          7 |       209 | 2024-01-08       | Completed |
-|           3005 |         10 |       214 | 2024-01-09       | Completed |
-|           3006 |          2 |       206 | 2024-01-10       | Completed |
-|           3007 |          4 |       202 | 2024-01-11       | Completed |
-|           3008 |          6 |       208 | 2024-01-12       | Completed |
-|           3009 |          8 |       213 | 2024-01-13       | Completed |
-|           3010 |          9 |       210 | 2024-01-14       | Completed |
-+----------------+------------+-----------+------------------+-----------+
-10 rows in set (0.0194 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > CREATE TABLE Prescriptions (
-                                          ->     Prescription_ID INT PRIMARY KEY,
-                                          ->     Appointment_ID INT,
-                                          ->     Medicine VARCHAR(100),
-                                          ->     Dosage VARCHAR(20),
-                                          ->     Duration_Days INT,
-                                          ->     FOREIGN KEY (Appointment_ID) REFERENCES Appointments(Appointment_ID)
-                                          -> );
-Query OK, 0 rows affected (0.0498 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > INSERT INTO Prescriptions VALUES
-                                          -> (5001, 3001, “Aspirin”, “75mg”, 30),
-                                          -> (5002, 3001, “Atorvastatin”, “20mg”, 30),
-                                          -> (5003, 3002, “Levetiracetam”, “500mg”, 60),
-                                          -> (5004, 3002, “Gabapentin”, “300mg”, 30),
-                                          -> (5005, 3003, “Ibuprofen”, “400mg”, 10),
-                                          -> (5006, 3003, “Calcium”, “500mg”, 30),
-                                          -> (5007, 3004, “Paracetamol”, “500mg”, 5),
-                                          -> (5008, 3005, “Tamoxifen”, “20mg”, 90),
-                                          -> (5009, 3006, “Folic Acid”, “5mg”, 30),
-                                          -> (5010, 3007, “Cetirizine”, “10mg”, 15),
-                                          -> (5011, 3008, “Timolol Eye Drops”, “0.5%”, 30),
-                                          -> (5012, 3009, “Omeprazole”, “20mg”, 14),
-                                          -> (5013, 3010, “Sertraline”, “50mg”, 60);
-Query OK, 13 rows affected (0.0260 sec)
+| Technology | Usage |
+|---|---|
+| MySQL 9.7 | Database |
+| MySQL Shell | SQL execution |
+| SQL | Database queries |
+| GitHub | Version control & documentation |
 
-Records: 13  Duplicates: 0  Warnings: 0
- MySQL  localhost:3306 ssl  meditrack  SQL > CREATE TABLE Billing (
-                                          ->     Bill_ID INT PRIMARY KEY,
-                                          ->     Appointment_ID INT,
-                                          ->     Amount DECIMAL(10,2),
-                                          ->     Payment_Method VARCHAR(50),
+---
 
-	    Payment_Status VARCHAR(20),
+## 🗂️ Database Schema
 
-                                          ->     FOREIGN KEY (Appointment_ID) REFERENCES Appointments(Appointment_ID)
-                                          -> );
-Query OK, 0 rows affected (0.0710 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > INSERT INTO Billing VALUES
-                                          -> (4001, 3001, 800.00, “Credit Card”, “Paid”),
-                                          -> (4002, 3002, 900.00, “Credit Card”, “Paid”),
-                                          -> (4003, 3003, 700.00, “Cash”, “Paid”),
-                                          -> (4004, 3004, 300.00, “Debit Card”, “Paid”),
-                                          -> (4005, 3005, 1000.00, “Credit Card”, “Paid”),
-                                          -> (4006, 3006, 600.00, “UPI”, “Paid”),
-                                          -> (4007, 3007, 500.00, “Cash”, “Paid”),
-                                          -> (4008, 3008, 550.00, “Debit Card”, “Paid”),
-                                          -> (4009, 3009, 800.00, “Credit Card”, “Paid”),
-                                          -> (4010, 3010, 650.00, “UPI”, “Paid”);
-Query OK, 10 rows affected (0.0064 sec)
+```text
+MediTrack
+│
+├── Patients
+│   └── Patient_ID (PK)
+│
+├── Doctors
+│   └── Doctor_ID (PK)
+│
+├── Appointments
+│   ├── Appointment_ID (PK)
+│   ├── Patient_ID (FK)
+│   └── Doctor_ID (FK)
+│
+├── Prescriptions
+│   ├── Prescription_ID (PK)
+│   └── Appointment_ID (FK)
+│
+└── Billing
+    ├── Bill_ID (PK)
+    └── Appointment_ID (FK)
+```
 
-Records: 10  Duplicates: 0  Warnings: 0
- MySQL  localhost:3306 ssl  meditrack  SQL > SELECT * FROM Billing;
-+---------+----------------+---------+----------------+----------------+
-| Bill_ID | Appointment_ID | Amount  | Payment_Method | Payment_Status |
-+---------+----------------+---------+----------------+----------------+
-|    4001 |           3001 |  800.00 | Credit Card    | Paid           |
-|    4002 |           3002 |  900.00 | Credit Card    | Paid           |
-|    4003 |           3003 |  700.00 | Cash           | Paid           |
-|    4004 |           3004 |  300.00 | Debit Card     | Paid           |
-|    4005 |           3005 | 1000.00 | Credit Card    | Paid           |
-|    4006 |           3006 |  600.00 | UPI            | Paid           |
-|    4007 |           3007 |  500.00 | Cash           | Paid           |
-|    4008 |           3008 |  550.00 | Debit Card     | Paid           |
-|    4009 |           3009 |  800.00 | Credit Card    | Paid           |
-|    4010 |           3010 |  650.00 | UPI            | Paid           |
-+---------+----------------+---------+----------------+----------------+
-10 rows in set (0.0012 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL > SELECT *
-                                          -> FROM Appointments
-                                          -> WHERE Appointment_Date > ‘2024-01-08’;
-+----------------+------------+-----------+------------------+-----------+
-| Appointment_ID | Patient_ID | Doctor_ID | Appointment_Date | Status    |
-+----------------+------------+-----------+------------------+-----------+
-|           3005 |         10 |       214 | 2024-01-09       | Completed |
-|           3006 |          2 |       206 | 2024-01-10       | Completed |
-|           3007 |          4 |       202 | 2024-01-11       | Completed |
-|           3008 |          6 |       208 | 2024-01-12       | Completed |
-|           3009 |          8 |       213 | 2024-01-13       | Completed |
-|           3010 |          9 |       210 | 2024-01-14       | Completed |
-+----------------+------------+-----------+------------------+-----------+
-6 rows in set (0.0220 sec)
- MySQL  localhost:3306 ssl  meditrack  SQL >
+---
 
+# 🔗 ER Diagram
+
+The following Entity-Relationship diagram represents the structure and relationships between the five tables in the MediTrack database.
+
+```mermaid
+erDiagram
+
+    PATIENTS ||--o{ APPOINTMENTS : "1 : N"
+    DOCTORS ||--o{ APPOINTMENTS : "1 : N"
+    APPOINTMENTS ||--o{ PRESCRIPTIONS : "1 : N"
+    APPOINTMENTS ||--o| BILLING : "1 : 1"
+
+    PATIENTS {
+        INT Patient_ID PK
+        VARCHAR Name
+        INT Age
+        VARCHAR Gender
+        VARCHAR Contact
+        VARCHAR Email
+        VARCHAR Address
+    }
+
+    DOCTORS {
+        INT Doctor_ID PK
+        VARCHAR Name
+        VARCHAR Specialization
+        DECIMAL Fee
+        INT Experience_Years
+    }
+
+    APPOINTMENTS {
+        INT Appointment_ID PK
+        INT Patient_ID FK
+        INT Doctor_ID FK
+        DATE Appointment_Date
+        VARCHAR Status
+    }
+
+    PRESCRIPTIONS {
+        INT Prescription_ID PK
+        INT Appointment_ID FK
+        VARCHAR Medicine
+        VARCHAR Dosage
+        INT Duration_Days
+    }
+
+    BILLING {
+        INT Bill_ID PK
+        INT Appointment_ID FK
+        DECIMAL Amount
+        VARCHAR Payment_Method
+        VARCHAR Payment_Status
+    }
+```
+
+---
+
+## 🔄 Relationships
+
+| From | To | Relationship | Description |
+|---|---|---|---|
+| Patients | Appointments | **1 : N** | One patient can have multiple appointments |
+| Doctors | Appointments | **1 : N** | One doctor can handle multiple appointments |
+| Appointments | Prescriptions | **1 : N** | One appointment can have multiple prescriptions |
+| Appointments | Billing | **1 : 1** | One appointment has one billing record |
+
+### Relationship Summary
+
+```text
+Patients      1 ─────────── N  Appointments
+Doctors       1 ─────────── N  Appointments
+Appointments  1 ─────────── N  Prescriptions
+Appointments  1 ─────────── 1  Billing
+```
+
+### Relationship Explanation
+
+**Patients → Appointments — 1 : N**
+
+One patient can have multiple appointments.
+
+**Doctors → Appointments — 1 : N**
+
+One doctor can handle multiple appointments.
+
+**Appointments → Prescriptions — 1 : N**
+
+One appointment can have multiple prescription records.
+
+**Appointments → Billing — 1 : 1**
+
+One appointment is associated with one billing record.
+
+> **Note:** The current `Billing` design is intended as a 1:1 relationship. To enforce this relationship at the database level, `Billing.Appointment_ID` should be `UNIQUE`.
+
+```sql
+ALTER TABLE Billing
+ADD CONSTRAINT UQ_Billing_Appointment
+UNIQUE (Appointment_ID);
+```
+
+---
+
+# 🏗️ Database Architecture
+
+```text
+                         ┌─────────────────┐
+                         │     PATIENTS    │
+                         │─────────────────│
+                         │ Patient_ID (PK) │
+                         │ Name            │
+                         │ Age             │
+                         │ Gender          │
+                         │ Contact         │
+                         │ Email           │
+                         │ Address         │
+                         └────────┬────────┘
+                                  │
+                                  │ Patient_ID
+                                  │ 1 : N
+                                  ▼
+                         ┌─────────────────────┐
+                         │    APPOINTMENTS     │
+                         │─────────────────────│
+                         │ Appointment_ID (PK) │
+                         │ Patient_ID (FK)     │
+                         │ Doctor_ID (FK)      │
+                         │ Appointment_Date    │
+                         │ Status              │
+                         └──────┬───────┬──────┘
+                                │       │
+                         1 : N  │       │  1 : N
+                                │       │
+                                ▼       ▼
+                    ┌────────────────┐  ┌─────────────────┐
+                    │ PRESCRIPTIONS  │  │     DOCTORS     │
+                    │────────────────│  │─────────────────│
+                    │Prescription_ID │  │ Doctor_ID (PK)  │
+                    │     (PK)       │  │ Name            │
+                    │Appointment_ID  │  │ Specialization  │
+                    │     (FK)       │  │ Fee             │
+                    │ Medicine       │  │ Experience      │
+                    │ Dosage         │  └─────────────────┘
+                    │ Duration_Days  │
+                    └────────────────┘
+
+                                │
+                                │ Appointment_ID
+                                │ 1 : 1
+                                ▼
+                       ┌─────────────────────┐
+                       │       BILLING       │
+                       │─────────────────────│
+                       │ Bill_ID (PK)        │
+                       │ Appointment_ID (FK) │
+                       │ Amount              │
+                       │ Payment_Method      │
+                       │ Payment_Status      │
+                       └─────────────────────┘
+```
+
+---
+
+# 📋 Tables
+
+## Patients
+
+Stores patient details.
+
+| Column | Type | Key |
+|---|---|---|
+| `Patient_ID` | INT | PK |
+| `Name` | VARCHAR(100) | |
+| `Age` | INT | |
+| `Gender` | VARCHAR(10) | |
+| `Contact` | VARCHAR(15) | |
+| `Email` | VARCHAR(100) | |
+| `Address` | VARCHAR(100) | |
+
+---
+
+## Doctors
+
+Stores doctor details.
+
+| Column | Type | Key |
+|---|---|---|
+| `Doctor_ID` | INT | PK |
+| `Name` | VARCHAR(100) | |
+| `Specialization` | VARCHAR(50) | |
+| `Fee` | DECIMAL(10,2) | |
+| `Experience_Years` | INT | |
+
+---
+
+## Appointments
+
+Connects patients and doctors.
+
+| Column | Type | Key |
+|---|---|---|
+| `Appointment_ID` | INT | PK |
+| `Patient_ID` | INT | FK |
+| `Doctor_ID` | INT | FK |
+| `Appointment_Date` | DATE | |
+| `Status` | VARCHAR(20) | |
+
+---
+
+## Prescriptions
+
+Stores prescribed medicines.
+
+| Column | Type | Key |
+|---|---|---|
+| `Prescription_ID` | INT | PK |
+| `Appointment_ID` | INT | FK |
+| `Medicine` | VARCHAR(100) | |
+| `Dosage` | VARCHAR(20) | |
+| `Duration_Days` | INT | |
+
+---
+
+## Billing
+
+Stores payment information.
+
+| Column | Type | Key |
+|---|---|---|
+| `Bill_ID` | INT | PK |
+| `Appointment_ID` | INT | FK |
+| `Amount` | DECIMAL(10,2) | |
+| `Payment_Method` | VARCHAR(50) | |
+| `Payment_Status` | VARCHAR(20) | |
+
+---
+
+# 📊 Sample Data
+
+| Table | Records |
+|---|---:|
+| Patients | 20 |
+| Doctors | 15 |
+| Appointments | 10 |
+| Prescriptions | 13 |
+| Billing | 10 |
+
+---
+
+# 🚀 Getting Started
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/MediTrack-MySQL.git
+cd MediTrack-MySQL
+```
+
+## 2. Open MySQL Shell
+
+Connect to your MySQL server:
+
+```sql
+\connect root@localhost:3306
+```
+
+## 3. Create the Database
+
+```sql
+CREATE DATABASE MediTrack;
+USE MediTrack;
+```
+
+## 4. Run the SQL File
+
+If the repository contains `MediTrack.sql`:
+
+```sql
+SOURCE MediTrack.sql;
+```
+
+Or execute the SQL commands manually in this order:
+
+```text
+1. Create Patients
+2. Insert Patients
+3. Create Doctors
+4. Insert Doctors
+5. Create Appointments
+6. Insert Appointments
+7. Create Prescriptions
+8. Insert Prescriptions
+9. Create Billing
+10. Insert Billing
+```
+
+---
+
+# 🔍 Example Queries
+
+## View All Patients
+
+```sql
+SELECT * FROM Patients;
+```
+
+## View All Doctors
+
+```sql
+SELECT * FROM Doctors;
+```
+
+## Find Patients Above 40 Years Old
+
+```sql
+SELECT *
+FROM Patients
+WHERE Age > 40;
+```
+
+## Find Doctors With More Than 10 Years of Experience
+
+```sql
+SELECT *
+FROM Doctors
+WHERE Experience_Years > 10;
+```
+
+## Find Appointments After January 8, 2024
+
+```sql
+SELECT *
+FROM Appointments
+WHERE Appointment_Date > '2024-01-08';
+```
+
+---
+
+# 🔗 JOIN Example
+
+Get patient, doctor, specialization, and appointment information:
+
+```sql
+SELECT
+    Patients.Name AS Patient_Name,
+    Doctors.Name AS Doctor_Name,
+    Doctors.Specialization,
+    Appointments.Appointment_Date,
+    Appointments.Status
+FROM Appointments
+JOIN Patients
+    ON Appointments.Patient_ID = Patients.Patient_ID
+JOIN Doctors
+    ON Appointments.Doctor_ID = Doctors.Doctor_ID;
+```
+
+---
+
+# 💊 Prescription Query
+
+```sql
+SELECT
+    Patients.Name AS Patient_Name,
+    Prescriptions.Medicine,
+    Prescriptions.Dosage,
+    Prescriptions.Duration_Days
+FROM Prescriptions
+JOIN Appointments
+    ON Prescriptions.Appointment_ID = Appointments.Appointment_ID
+JOIN Patients
+    ON Appointments.Patient_ID = Patients.Patient_ID;
+```
+
+---
+
+# 💳 Billing Query
+
+```sql
+SELECT
+    Patients.Name AS Patient_Name,
+    Billing.Amount,
+    Billing.Payment_Method,
+    Billing.Payment_Status
+FROM Billing
+JOIN Appointments
+    ON Billing.Appointment_ID = Appointments.Appointment_ID
+JOIN Patients
+    ON Appointments.Patient_ID = Patients.Patient_ID;
+```
+
+---
+
+# 🔐 Keys & Constraints
+
+## Primary Keys
+
+```text
+Patients       → Patient_ID
+Doctors        → Doctor_ID
+Appointments   → Appointment_ID
+Prescriptions  → Prescription_ID
+Billing        → Bill_ID
+```
+
+## Foreign Keys
+
+```text
+Appointments.Patient_ID
+        ↓
+Patients.Patient_ID
+
+Appointments.Doctor_ID
+        ↓
+Doctors.Doctor_ID
+
+Prescriptions.Appointment_ID
+        ↓
+Appointments.Appointment_ID
+
+Billing.Appointment_ID
+        ↓
+Appointments.Appointment_ID
+```
+
+---
+
+# 🧠 SQL Concepts Covered
+
+- Database creation
+- Table creation
+- Primary Keys
+- Foreign Keys
+- Referential Integrity
+- One-to-One relationships
+- One-to-Many relationships
+- `INSERT`
+- `SELECT`
+- `WHERE`
+- `JOIN`
+- Data filtering
+- Relational database design
+- Data types
+- Constraints
+
+---
+
+# 📁 Project Structure
+
+```text
+MediTrack-MySQL/
+│
+├── README.md
+├── MediTrack.sql
+│
+└── screenshots/
+    ├── patients.png
+    ├── doctors.png
+    ├── appointments.png
+    ├── prescriptions.png
+    └── billing.png
+```
+
+---
+
+# 🎯 Learning Objectives
+
+This project was created to practice:
+
+1. Designing a relational database
+2. Creating tables and relationships
+3. Using primary and foreign keys
+4. Working with one-to-many relationships
+5. Understanding one-to-one relationships
+6. Inserting and retrieving data
+7. Writing SQL queries
+8. Using `JOIN` operations
+9. Maintaining referential integrity
+
+---
+
+# 👨‍💻 Author
+
+**Raj Gupta**
+
+B.Tech — Computer Science & Engineering
+
+---
+
+# 📌 Project Status
+
+**Status:** 🟢 Completed
+
+This project was developed for **SQL and database learning purposes**.
+
+---
+
+# 📜 License
+
+This project is intended for educational and learning purposes.
