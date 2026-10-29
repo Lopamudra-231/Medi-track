@@ -538,9 +538,9 @@ This project was created to practice:
 
 # 👨‍💻 Author
 
-**Raj Gupta**
+**Lopamudra Das**
 
-B.Tech — Computer Science & Engineering
+B.Tech — electronic and Communication Engineering
 
 ---
 
